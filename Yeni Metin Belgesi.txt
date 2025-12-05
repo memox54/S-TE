@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dijital Kaizen Platformu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: #0f172a;
+      color: #e5e7eb;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 960px;
+    }
+
+    header {
+      margin-bottom: 20px;
+    }
+
+    .title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+      color: #9ca3af;
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .card {
+      background: #020617;
+      border-radius: 14px;
+      padding: 18px 18px 20px;
+      border: 1px solid #1f2937;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .card-header {
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+
+    .badge {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #1d4ed8;
+      color: #e5e7eb;
+      white-space: nowrap;
+    }
+
+    label {
+      font-size: 0.85rem;
+      display: block;
+      margin-bottom: 4px;
+      color: #9ca3af;
+    }
+
+    select,
+    input[type="text"],
+    textarea {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid #374151;
+      background: #020617;
+      color: #e5e7eb;
+      padding: 8px 10px;
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+      outline: none;
+      transition: border 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    select:focus,
+    input[type="text"]:focus,
+    textarea:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 1px #3b82f6;
+    }
+
+    textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .row > div {
+      flex: 1;
+      min-width: 180px;
+    }
+
+    .field-description {
+      font-size: 0.75rem;
+      color: #6b7280;
+      margin-top: -6px;
+      margin-bottom: 8px;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 999px;
+      padding: 8px 16px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 6px;
+      background: #2563eb;
+      color: white;
+      transition: background 0.15s ease, transform 0.08s ease;
+    }
+
+    .btn.secondary {
+      background: transparent;
+      border: 1px solid #4b5563;
+      color: #e5e7eb;
+    }
+
+    .btn:active {
+      transform: scale(0.97);
+    }
+
+    .btn:hover {
+      background: #1d4ed8;
+    }
+
+    .btn.secondary:hover {
+      background: #111827;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .chip {
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid #4b5563;
+      font-size: 0.75rem;
+      color: #d1d5db;
+    }
+
+    .info-text {
+      font-size: 0.8rem;
+      color: #9ca3af;
+      margin-top: 6px;
+    }
+
+    .report-section {
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px dashed #1f2937;
+    }
+
+    .report-section h3 {
+      font-size: 0.92rem;
+      margin-bottom: 4px;
+      color: #d1d5db;
+    }
+
+    .report-section p,
+    .report-section ul {
+      font-size: 0.82rem;
+      color: #9ca3af;
+      line-height: 1.5;
+    }
+
+    .report-section ul {
+      padding-left: 18px;
+      margin-top: 4px;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .pill {
+      font-size: 0.72rem;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid #374151;
+      color: #9ca3af;
+    }
+
+    .report-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+      font-size: 0.78rem;
+      color: #6b7280;
+    }
+
+    .report-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .small-pill {
+      border-radius: 999px;
+      border: 1px solid #1f2937;
+      padding: 2px 6px;
+      font-size: 0.7rem;
+      color: #9ca3af;
+    }
+
+    @media (max-width: 640px) {
+      .title {
+        font-size: 1.4rem;
+      }
+      .card {
+        padding: 14px 12px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div class="title">Dijital Kaizen Platformu</div>
+      <div class="subtitle">
+        Fabrikadaki sürekli iyileştirme (Kaizen) sürecini, basit bir web arayüzü ile dijitale taşı.
+      </div>
+    </header>
+
+    <main>
+      <!-- ADIM 1: Firma Seçimi -->
+      <section class="card" id="step-1">
+        <div class="card-header">
+          <div class="card-title">1. Adım – Hangi firmada çalışıyorsun?</div>
+          <div class="badge">Firma Seç</div>
+        </div>
+
+        <label for="company-select">Firma</label>
+        <select id="company-select">
+          <option value="">– Firma seçin –</option>
+        </select>
+        <div class="field-description">
+          Listede olmayan bir firmaysa, ileride manuel ekleme özelliği ekleyebilirsin.
+        </div>
+
+        <button class="btn" id="go-step-2-btn">
+          Devam et
+          <span>→</span>
+        </button>
+      </section>
+
+      <!-- A
